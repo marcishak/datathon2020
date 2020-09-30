@@ -26,7 +26,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Pipeline for preprocessing the data for modelling -> explain what nodes do what sequentially 
+"""Pipeline for preprocessing the data for modelling -> explain what nodes do
+what sequentially
 """
 
 from kedro.pipeline import Pipeline, node
@@ -39,7 +40,7 @@ def create_pipeline(**kwargs):
         [
             node(
                 split_data,
-                ["example_iris_data", "params:example_test_data_ratio"],
+                ["clean_example_iris_data", "params:example_test_data_ratio"],
                 dict(
                     train_x="example_train_x",
                     train_y="example_train_y",

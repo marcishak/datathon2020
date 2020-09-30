@@ -31,23 +31,14 @@
 
 from kedro.pipeline import Pipeline, node
 
-# from .nodes import predict, report_accuracy, train_model
+from .nodes import predict_model, report_accuracy, train_rf
 
 
 def create_pipeline(**kwargs):
     return Pipeline(
         [
-            # node(
-            #     train_model,
-            #     ["example_train_x", "example_train_y", "parameters"],
-            #     "example_model",
-            #     tag="tag me"
-            # ),
-            # node(
-            #     predict,
-            #     dict(model="example_model", test_x="example_test_x"),
-            #     "example_predictions",
-            # ),
-            # node(report_accuracy, ["example_predictions", "example_test_y"], None),
+            node(train_rf, ["example_train_x", "example_train_y"], "rf_model"),
+            node(predict_model, ["rf_model", "example_test_x"], "preds"),
+            node(report_accuracy, ["preds", "example_test_y"], None),
         ]
     )

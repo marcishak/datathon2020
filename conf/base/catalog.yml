@@ -47,4 +47,14 @@ example_iris_data:
   type: pandas.CSVDataSet
   filepath: data/01_raw/iris.csv
 
+  
+clean_example_iris_data:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/iris.csv
 
+
+preds:
+  type: pandas.CSVDataSet
+  filepath: data/07_model_output/predictions.csv
+  save_args:
+    index: False
