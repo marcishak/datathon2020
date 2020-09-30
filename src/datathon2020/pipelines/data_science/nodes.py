@@ -37,6 +37,7 @@
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
+from sklearn.linear_model import LogisticRegression
 
 
 def train_rf(X, y):
@@ -59,3 +60,10 @@ def report_accuracy(preds, y_test):
     """Outputs sklearn classificaition report to console
     """
     print(classification_report(y_test, preds))
+
+
+def train_lr(X, y):
+    """Wrapper which trains a logisitc regression model with X,y
+    """
+    lr = LogisticRegression()
+    return lr.fit(X, y)
