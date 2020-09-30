@@ -58,7 +58,9 @@ class ProjectHooks:
             "dp": data_preprocessing_pipeline,
             "de": data_cleanup_pipeline + data_preprocessing_pipeline,
             "ds": data_science_pipeline,
-            "__default__": data_cleanup_pipeline + data_preprocessing_pipeline + data_science_pipeline,
+            "__default__": data_cleanup_pipeline
+            + data_preprocessing_pipeline
+            + data_science_pipeline,
         }
 
     @hook_impl
