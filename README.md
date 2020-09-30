@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Datathon 2020
 
 ## Overview
@@ -120,3 +121,6 @@ To automatically strip out all output cell contents before committing to `git`, 
 ## Package your Kedro project
 
 [Further information about building project documentation and packaging your project](https://kedro.readthedocs.io/en/stable/03_tutorial/05_package_a_project.html)
+=======
+# datathon2020
+>>>>>>> 9fe7ee2265711ef83355bc10d80a9467298104be
