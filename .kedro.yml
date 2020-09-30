@@ -1,0 +1,6 @@
+context_path: datathon2020.run.ProjectContext
+project_name: "Datathon 2020"
+project_version: "0.16.5"
+package_name: "datathon2020"
+hooks:
+  - datathon2020.hooks.project_hooks
