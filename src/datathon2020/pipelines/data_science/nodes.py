@@ -41,6 +41,8 @@ from sklearn.linear_model import LogisticRegression
 import statsmodels.api as sm
 from patsy import dmatrices
 
+# import matplotlib.pyplot as plt
+
 
 def train_rf(X, y):
     """Wrapper which trains a random forest model with X,y
@@ -79,5 +81,9 @@ def train_lr(X, y):
     return lr.fit(X, y)
 
 
-def stats_model_summary(model):
-    print(model.summary())
+def stats_model_summary(model, regressor_no):
+    summary_string = model.summary()
+    qq_plot = sm.qqplot(model.resid, line="45")
+    # plt.show()
+    reg_fit = sm.graphics.plot_fit(model, regressor_no, vlines=True)
+    return [summary_string.as_text(), qq_plot, reg_fit]

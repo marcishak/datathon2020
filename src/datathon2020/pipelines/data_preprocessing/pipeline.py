@@ -35,7 +35,7 @@ from kedro.pipeline import Pipeline, node
 from .nodes import (
     exp_weight_wig_data,
     aggregate_excess_deaths,
-    combine_data_sets,
+    naive_combine_data_sets,
     pca_wig_data,
 )
 
@@ -44,14 +44,14 @@ def create_pipeline(**kwargs):
     return Pipeline(
         [
             node(exp_weight_wig_data, "clean_wig_data", "exp_wig_data_pre_pca"),
-            node(pca_wig_data, "exp_wig_data_pre_pca", "exp_wig_data"),
+            node(pca_wig_data, "exp_wig_data_pre_pca", ["exp_wig_data", "pca_wig"]),
             node(
                 aggregate_excess_deaths,
                 "cleaned_excess_deaths",
                 "agg_cleaned_excess_deaths",
             ),
             node(
-                combine_data_sets,
+                naive_combine_data_sets,
                 ["agg_cleaned_excess_deaths", "exp_wig_data"],
                 "merged_data_wig_excess",
             ),

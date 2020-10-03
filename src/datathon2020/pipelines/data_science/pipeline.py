@@ -31,10 +31,7 @@
 
 from kedro.pipeline import Pipeline, node
 
-from .nodes import (
-    train_LinReg,
-    stats_model_summary
-)
+from .nodes import train_LinReg, stats_model_summary
 
 
 def create_pipeline(**kwargs):
@@ -47,8 +44,12 @@ def create_pipeline(**kwargs):
             ),
             node(
                 stats_model_summary,
-                "wigi_linear_model",
-                None
-            )
+                ["wigi_linear_model", "params:wigi_linear_model_regressor_no"],
+                [
+                    "wigi_linear_model_summary_output",
+                    "wigi_linear_model_qqplot",
+                    "wigi_linear_model_reg_fit",
+                ],
+            ),
         ]
     )

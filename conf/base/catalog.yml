@@ -50,28 +50,38 @@ example_iris_data:
 raw_mobility_report:
   type: pandas.CSVDataSet
   filepath: data/01_raw/Global_Mobility_Report.csv
+  layer: raw
 
 clean_wig_data:
   type: pandas.CSVDataSet
   filepath: data/02_intermediate/wgidataset.csv
-  versioned: True
+  layer: intermediate
+
 
 clean_example_iris_data:
   type: pandas.CSVDataSet
   filepath: data/03_primary/iris.csv
+  layer: primary
 
 exp_wig_data:
   type: pandas.CSVDataSet
   filepath: data/02_intermediate/exp_wgidataset.csv
+  layer: intermediate
 
+cleaned_health_factors:
+  type: pandas.CSVDataSet
+  filepath: data/02_intermediate/health_factors.csv
+  layer: intermediate
 
 raw_excess_deaths:
   type: pandas.CSVDataSet
   filepath: data/01_raw/all_weekly_excess_deaths.csv.txt
+  layer: raw
 
 cleaned_excess_deaths:
   type: pandas.CSVDataSet
   filepath: data/02_intermediate/cleaned_excess_deaths.csv
+  layer: intermediate
 
 agg_cleaned_excess_deaths:
   type: pandas.CSVDataSet
@@ -80,12 +90,32 @@ agg_cleaned_excess_deaths:
 merged_data_wig_excess:
   type: pandas.CSVDataSet
   filepath: data/05_model_input/merged_wig_excess.csv
+  # versioned: True
+  layer: model_input
 
 wigi_linear_model:
   type: pickle.PickleDataSet
   filepath: data/06_models/wigi_linear_model.pkl
+  layer: models
 
 
+wigi_linear_model_summary_output:
+  type: text.TextDataSet
+  filepath: data/08_reporting/wigi_linear_model_summary_output.txt
+  versioned: True
+  layer: reporting
+
+wigi_linear_model_qqplot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/wigi_linear_model_qqplot.png
+  versioned: True
+  layer: reporting
+
+wigi_linear_model_reg_fit:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/wigi_linear_model_reg_fit.png
+  versioned: True
+  layer: reporting
 
 preds:
   type: pandas.CSVDataSet
