@@ -60,6 +60,9 @@ clean_example_iris_data:
   type: pandas.CSVDataSet
   filepath: data/03_primary/iris.csv
 
+exp_wig_data:
+  type: pandas.CSVDataSet
+  filepath: data/02_intermediate/exp_wgidataset.csv
 
 preds:
   type: pandas.CSVDataSet

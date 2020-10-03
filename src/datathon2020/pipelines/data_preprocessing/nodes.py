@@ -34,7 +34,7 @@ from typing import Any, Dict
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
-
+import numpy as np
 
 def split_data(data: pd.DataFrame, example_test_data_ratio: float) -> Dict[str, Any]:
     """Node for splitting the classical Iris data set into training and test
@@ -84,3 +84,22 @@ def split_data(data: pd.DataFrame, example_test_data_ratio: float) -> Dict[str, 
         test_x=test_data_x,
         test_y=test_data_y,
     )
+
+
+def exp_weight_wig_data(df: pd.DataFrame) -> pd.DataFrame:
+    df["exp_val"] = 10/np.abs(2020 - df["year"])
+    df["vae"] = df["vae"] * df["exp_val"]
+    df["pve"] = df["pve"] * df["exp_val"]
+    df["gee"] = df["gee"] * df["exp_val"]
+    df["rqe"] = df["rqe"] * df["exp_val"]
+    df["rle"] = df["rle"] * df["exp_val"]
+    df["cce"] = df["cce"] * df["exp_val"]
+    ret_df = (df.
+    groupby(["code","countryname"]).
+    agg({"vae": "sum",
+        "pve": "sum",
+        "gee": "sum",
+        "rqe": "sum",
+        "rle": "sum",
+        "cce": "sum"}))
+    return ret_df

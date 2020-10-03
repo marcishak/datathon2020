@@ -83,7 +83,6 @@ def clean_data(data: pd.DataFrame) -> pd.DataFrame:
     return data
 
 
-
 def clean_wig_data(file_path: str) -> pd.DataFrame:
     """Cleans wig data from Stat file - This function is a crutch which relies on R!
     this takes the file path in from parameters! please set to the appropriate 
@@ -94,5 +93,7 @@ def clean_wig_data(file_path: str) -> pd.DataFrame:
     For required R packages see requirments.R 
     """
     print(os.getcwd())
-    os.system(f'Rscript src/datathon2020/pipelines/data_cleanup/clean_wigi.R {file_path}')
+    os.system(
+        f"Rscript src/datathon2020/pipelines/data_cleanup/clean_wigi.R {file_path}"
+    )
     return pd.read_csv("data/01_raw/wgidataset_stata/wgidataset.csv")

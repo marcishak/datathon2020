@@ -14,3 +14,4 @@ wheel==0.32.2
 sklearn
 pandas
 xlrd >= 1.0.0
+matplotlib

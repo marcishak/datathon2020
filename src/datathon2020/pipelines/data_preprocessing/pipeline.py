@@ -32,21 +32,16 @@ what sequentially
 
 from kedro.pipeline import Pipeline, node
 
-from .nodes import split_data
+from .nodes import exp_weight_wig_data
 
 
 def create_pipeline(**kwargs):
     return Pipeline(
         [
-            node(
-                split_data,
-                ["clean_example_iris_data", "params:example_test_data_ratio"],
-                dict(
-                    train_x="example_train_x",
-                    train_y="example_train_y",
-                    test_x="example_test_x",
-                    test_y="example_test_y",
-                ),
-            )
+           node(
+            exp_weight_wig_data, 
+           "clean_wig_data",
+           "exp_wig_data"
+           )
         ]
     )
