@@ -15,3 +15,6 @@ sklearn
 pandas
 xlrd >= 1.0.0
 matplotlib
+pandas-profiling
+statsmodels
+patsy

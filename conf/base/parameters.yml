@@ -9,3 +9,5 @@ example_num_train_iter: 10000
 example_learning_rate: 0.01
 
 wigi_data_setpath: "~/Personal/datathon2020/datathon_2020/data/01_raw/wgidataset_stata"
+
+wigi_linear_model_formula: "excess_deaths_per_100k ~ govt_trust_index"

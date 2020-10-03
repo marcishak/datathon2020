@@ -77,6 +77,16 @@ agg_cleaned_excess_deaths:
   type: pandas.CSVDataSet
   filepath: data/03_primary/agg_cleaned_excess_deaths.csv
 
+merged_data_wig_excess:
+  type: pandas.CSVDataSet
+  filepath: data/05_model_input/merged_wig_excess.csv
+
+wigi_linear_model:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/wigi_linear_model.pkl
+
+
+
 preds:
   type: pandas.CSVDataSet
   filepath: data/07_model_output/predictions.csv

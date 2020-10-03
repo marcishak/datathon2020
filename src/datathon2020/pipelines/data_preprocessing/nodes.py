@@ -41,6 +41,7 @@ import numpy as np
 def _last(vals):
     return vals[-1]
 
+
 def split_data(data: pd.DataFrame, example_test_data_ratio: float) -> Dict[str, Any]:
     """Node for splitting the classical Iris data set into training and test
     sets, each split into features and labels.
@@ -120,22 +121,21 @@ def exp_weight_wig_data(df: pd.DataFrame) -> pd.DataFrame:
 
 def aggregate_excess_deaths(df: pd.DataFrame) -> pd.DataFrame:
     ret_df = (
-        df
-        .sort_values("week")
+        df.sort_values("week")
         .groupby("country")
         .agg(
             {
-                    "population": "last",
-                    "week": "last",
-                    "year": "last",
-                    "total_deaths": "sum",
-                    "covid_deaths":  "sum",
-                    "expected_deaths":  "sum",
-                    "excess_deaths":  "sum",
-                    "non_covid_deaths":  "sum",
-                    "covid_deaths_per_100k":  "sum",
-                    "excess_deaths_per_100k":  "sum",
-                    # "excess_deaths_pct_change": "sum""
+                "population": "last",
+                "week": "last",
+                "year": "last",
+                "total_deaths": "sum",
+                "covid_deaths": "sum",
+                "expected_deaths": "sum",
+                "excess_deaths": "sum",
+                "non_covid_deaths": "sum",
+                "covid_deaths_per_100k": "sum",
+                "excess_deaths_per_100k": "sum",
+                # "excess_deaths_pct_change": "sum""
             }
         )
         .reset_index()
@@ -143,9 +143,8 @@ def aggregate_excess_deaths(df: pd.DataFrame) -> pd.DataFrame:
     return ret_df
 
 
-
 def combine_data_sets(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
-    yield
+    return df1.merge(df2)
 
 
 def pca_wig_data(df: pd.DataFrame):
@@ -154,9 +153,8 @@ def pca_wig_data(df: pd.DataFrame):
     eda in jupyter suggests that we only need 1 compenent
     """
     pca = PCA()
-    vals = pca.fit_transform(df.iloc[:,2:-1])
+    vals = pca.fit_transform(df.iloc[:, 2:-1])
     # print(pca.components_)
-    return pd.DataFrame({
-        "country": df["country"],
-        "govt_trust_index": vals*(-1)
-    })
+    return pd.DataFrame(
+        {"country": df["country"], "govt_trust_index": vals[:, 0] * (-1)}
+    )

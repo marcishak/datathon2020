@@ -37,15 +37,7 @@ from .nodes import clean_wig_data, clean_excess_deaths
 def create_pipeline(**kwargs):
     return Pipeline(
         [
-            node(
-                clean_wig_data,
-                "params:wigi_data_setpath",
-                "clean_wig_data"
-                ),
-            node(
-                clean_excess_deaths,
-                "raw_excess_deaths",
-                "cleaned_excess_deaths"
-                ),
+            node(clean_wig_data, "params:wigi_data_setpath", "clean_wig_data"),
+            node(clean_excess_deaths, "raw_excess_deaths", "cleaned_excess_deaths"),
         ]
     )

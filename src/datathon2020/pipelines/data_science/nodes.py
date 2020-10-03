@@ -38,13 +38,23 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 from sklearn.linear_model import LogisticRegression
+import statsmodels.api as sm
+from patsy import dmatrices
 
 
 def train_rf(X, y):
     """Wrapper which trains a random forest model with X,y
     """
     rf = RandomForestClassifier()
-    return rf.fit(X, y)
+    rf.fit(X, y)
+    return rf
+
+
+def train_LinReg(df: pd.DataFrame, formula: str):
+    "trains a stats_model linear_regression!"
+    y, X = dmatrices(formula, data=df, return_type="dataframe")
+    mod = sm.OLS(y, X)
+    return mod.fit()
 
 
 def predict_model(model, X):
@@ -67,3 +77,7 @@ def train_lr(X, y):
     """
     lr = LogisticRegression()
     return lr.fit(X, y)
+
+
+def stats_model_summary(model):
+    print(model.summary())
