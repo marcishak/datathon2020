@@ -31,8 +31,9 @@ the data is initally collected.
 
 # from typing import Any, Dict
 
-import pandas as pd
 import os
+
+import pandas as pd
 
 
 def clean_wig_data(file_path: str) -> pd.DataFrame:
@@ -60,4 +61,81 @@ def clean_excess_deaths(df):
     df = df.loc[df["region"] == df["country"]]
     df["country"] = df["country"].str.lower()
     df.loc[df["country"] == "britain", "country"] = "united kingdom"
+    return df
+
+
+def build_death_cases_count(df: pd.DataFrame) -> pd.DataFrame:
+    """builds out cases and deaths for each country
+    """
+    df1 = df.groupby(["Country/Region"]).Confirmed.sum().to_frame()
+    df2 = df.groupby(["Country/Region"]).Deaths.sum().to_frame()
+    return_df = pd.merge(df1, df2, on=["Country/Region"]).reset_index()
+    # print(return_df.head())
+    return_df["Country/Region"] = return_df["Country/Region"].replace(
+        ["Congo (Kinshasa)"], "Congo, Rep."
+    )
+    return_df["Country/Region"] = return_df["Country/Region"].replace(
+        ["Ivory Coast"], "Cote d'Ivoire"
+    )
+    return_df["Country/Region"] = return_df["Country/Region"].replace(
+        ["Macau"], "Macao SAR, China"
+    )
+    return_df["Country/Region"] = return_df["Country/Region"].replace(
+        ["Iran"], "Iran, Islamic Rep."
+    )
+    return_df["Country/Region"] = return_df["Country/Region"].replace(
+        ["Venezuela"], "Venezuela, RB"
+    )
+    return return_df
+
+
+def get_latest_info_WB(df: pd.DataFrame, col: str) -> pd.DataFrame:
+    df2 = pd.melt(
+        df, ["Country Name", "Country Code", "Indicator Name", "Indicator Code"]
+    )
+    df3 = (
+        df2[df2["variable"] != "Unnamed: 64"]
+        .dropna()
+        .sort_values("variable")
+        .groupby(["Country Name", "Country Code"])
+        .agg({"variable": "last", "value": "last"})
+        .reset_index()
+    )
+    df3.columns = ["Country Name", "Country Code", "year", col]
+    return df3
+
+
+def merge_WB_datasets(
+    df1: pd.DataFrame,
+    df3: pd.DataFrame,
+    df2: pd.DataFrame,
+    df4: pd.DataFrame,
+    df5: pd.DataFrame,
+    df6: pd.DataFrame,
+) -> pd.DataFrame:
+    """
+    Merges the 6 WB data sets into  a single megatable
+    """
+    health_factors = pd.merge(df1, df2, on=["Country Name", "Country Code"], how="outer")
+    health_factors = pd.merge(health_factors, df3, on=["Country Name", "Country Code"], how="outer")
+    health_factors = pd.merge(health_factors, df4, on=["Country Name", "Country Code"], how="outer")
+    health_factors = pd.merge(health_factors, df5, on=["Country Name", "Country Code"], how="outer")
+    health_factors = pd.merge(health_factors, df6, on=["Country Name", "Country Code"], how="outer")
+    return health_factors
+
+
+def merge_WB_health_systems(
+    WB: pd.DataFrame, health_systems: pd.DataFrame
+) -> pd.DataFrame:
+    print(WB.head())
+    print(health_systems.head())
+    return pd.merge(
+        WB, health_systems, left_on="Country Name", right_on="World_Bank_Name"
+    )
+
+
+def merge_WB_heath_corona(WB: pd.DataFrame, corona: pd.DataFrame) -> pd.DataFrame:
+    # print(WB.head())
+    # print(corona.head())
+    df = pd.merge(WB, corona, left_on="Country Name", right_on="Country/Region")
     return df

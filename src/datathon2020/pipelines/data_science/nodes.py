@@ -35,11 +35,11 @@
 
 # import numpy as np
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report
-from sklearn.linear_model import LogisticRegression
 import statsmodels.api as sm
 from patsy import dmatrices
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
 
 # import matplotlib.pyplot as plt
 

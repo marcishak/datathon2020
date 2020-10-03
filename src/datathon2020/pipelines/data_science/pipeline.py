@@ -31,7 +31,7 @@
 
 from kedro.pipeline import Pipeline, node
 
-from .nodes import train_LinReg, stats_model_summary
+from .nodes import stats_model_summary, train_LinReg
 
 
 def create_pipeline(**kwargs):

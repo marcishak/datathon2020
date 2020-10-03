@@ -15,3 +15,10 @@ wigi_data_setpath: "~/Personal/datathon2020/datathon_2020/data/01_raw/wgidataset
 wigi_linear_model_formula: "excess_deaths_per_100k ~ govt_trust_index"
 
 wigi_linear_model_regressor_no: 1
+
+hospital_beds_param: "hospital_beds_per_1000"
+specialist_doctors_param: "specialist_doctors_pct"
+health_workers_param: "health_workers_pct"
+physicians_param: "physicians_pct"
+handwashing_param: "handwashing_pct"
+glbl_population_param: "population_total"

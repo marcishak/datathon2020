@@ -57,6 +57,74 @@ clean_wig_data:
   filepath: data/02_intermediate/wgidataset.csv
   layer: intermediate
 
+covid_19_data:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/covid_19_data.csv
+  layer: raw
+
+covid_19_data_cases_deaths:
+  type: pandas.CSVDataSet
+  filepath: data/02_raw/covid_19_data.csv
+  layer: intermediate
+
+hospital_beds_raw:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/API_SH.MED.BEDS.ZS_DS2_en_csv_v2_1346721.csv
+  layer: raw
+  load_args:
+    skiprows: 3
+
+specialist_doctors_raw:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/API_SH.MED.SAOP.P5_DS2_en_csv_v2_1345400.csv
+  layer: raw
+  load_args:
+    skiprows: 3
+
+health_workers_raw:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/API_SH.MED.CMHW.P3_DS2_en_csv_v2_1351263.csv
+  layer: raw
+  load_args:
+    skiprows: 3
+
+physicians_raw:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/API_SH.MED.PHYS.ZS_DS2_en_csv_v2_1348462.csv
+  layer: raw
+  load_args:
+    skiprows: 3
+
+handwashing_raw:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/API_SH.STA.HYGN.ZS_DS2_en_csv_v2_1351290.csv
+  layer: raw
+  load_args:
+    skiprows: 3
+
+glbl_population_raw:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/API_SP.POP.TOTL_DS2_en_csv_v2_1345178.csv
+  layer: raw
+  load_args:
+    skiprows: 3
+
+health_system:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/2.12_Health_systems.csv
+  layer: raw
+
+WB_data_full:
+  type: pandas.CSVDataSet
+  filepath: data/02_intermediate/WB_data_full.csv
+  layer: intermediate
+
+
+WB_health_cases:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/WB_health_cases.csv
+  layer: primary
+
 
 clean_example_iris_data:
   type: pandas.CSVDataSet

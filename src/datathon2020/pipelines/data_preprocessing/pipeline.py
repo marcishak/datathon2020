@@ -33,8 +33,8 @@ what sequentially
 from kedro.pipeline import Pipeline, node
 
 from .nodes import (
-    exp_weight_wig_data,
     aggregate_excess_deaths,
+    exp_weight_wig_data,
     naive_combine_data_sets,
     pca_wig_data,
 )

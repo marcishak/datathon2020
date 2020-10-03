@@ -31,12 +31,12 @@ suited for our modelling algos
 
 from typing import Any, List
 
+import numpy as np
 import pandas as pd
 
 # from sklearn.model_selection import train_test_split
 # from sklearn.preprocessing import LabelEncoder
 from sklearn.decomposition import PCA
-import numpy as np
 
 
 def _last(vals):
@@ -130,7 +130,3 @@ def pca_wig_data(df: pd.DataFrame) -> List[Any]:
         pd.DataFrame({"country": df["country"], "govt_trust_index": vals[:, 0] * (-1)}),
         pca,
     ]
-
-
-def combine_with_health_data(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
-    yield
