@@ -23,6 +23,7 @@ logs/**
 !data/01_raw/iris.csv
 !data/01_raw/wgidataset_stata/wgidataset.dta
 !data/02_intermediate/**
+!data/01_raw/**
 
 ##########################
 # Common files
