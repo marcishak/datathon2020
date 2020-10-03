@@ -8,3 +8,4 @@ example_test_data_ratio: 0.2
 example_num_train_iter: 10000
 example_learning_rate: 0.01
 
+wigi_data_setpath: "~/Personal/datathon2020/datathon_2020/data/01_raw/wgidataset_stata"

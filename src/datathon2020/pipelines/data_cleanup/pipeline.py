@@ -31,8 +31,14 @@
 
 from kedro.pipeline import Pipeline, node
 
-from .nodes import clean_data
+from .nodes import clean_data, clean_wig_data
 
 
 def create_pipeline(**kwargs):
-    return Pipeline([node(clean_data, "example_iris_data", "clean_example_iris_data",)])
+    return Pipeline(
+        [
+            node(clean_wig_data, 
+            "params:wigi_data_setpath",
+            "clean_wig_data")
+        ]
+        )

@@ -32,6 +32,7 @@ data is initally collected.
 # from typing import Any, Dict
 
 import pandas as pd
+import os
 
 # from sklearn.model_selection import train_test_split
 
@@ -80,3 +81,10 @@ import pandas as pd
 
 def clean_data(data: pd.DataFrame) -> pd.DataFrame:
     return data
+
+
+
+def clean_wig_data(file_path: str) -> pd.DataFrame:
+    print(os.getcwd())
+    os.system(f'Rscript src/datathon2020/pipelines/data_cleanup/clean_wigi.R {file_path}')
+    return pd.read_csv("data/01_raw/wgidataset_stata/wgidataset.csv")

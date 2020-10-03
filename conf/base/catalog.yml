@@ -51,6 +51,10 @@ raw_mobility_report:
   type: pandas.CSVDataSet
   filepath: data/01_raw/Global_Mobility_Report.csv
 
+clean_wig_data:
+  type: pandas.CSVDataSet
+  filepath: data/02_intermediate/wgidataset.csv
+  versioned: True
 
 clean_example_iris_data:
   type: pandas.CSVDataSet
@@ -62,3 +66,5 @@ preds:
   filepath: data/07_model_output/predictions.csv
   save_args:
     index: False
+
+
