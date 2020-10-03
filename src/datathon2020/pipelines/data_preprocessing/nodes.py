@@ -29,12 +29,17 @@
 suited for our modelling algos
 """
 
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
+from sklearn.decomposition import PCA
 import numpy as np
+
+
+def _last(vals):
+    return vals[-1]
 
 def split_data(data: pd.DataFrame, example_test_data_ratio: float) -> Dict[str, Any]:
     """Node for splitting the classical Iris data set into training and test
@@ -87,19 +92,71 @@ def split_data(data: pd.DataFrame, example_test_data_ratio: float) -> Dict[str, 
 
 
 def exp_weight_wig_data(df: pd.DataFrame) -> pd.DataFrame:
-    df["exp_val"] = 10/np.abs(2020 - df["year"])
+    df["exp_val"] = 10 / np.abs(2020 - df["year"])
     df["vae"] = df["vae"] * df["exp_val"]
     df["pve"] = df["pve"] * df["exp_val"]
     df["gee"] = df["gee"] * df["exp_val"]
     df["rqe"] = df["rqe"] * df["exp_val"]
     df["rle"] = df["rle"] * df["exp_val"]
     df["cce"] = df["cce"] * df["exp_val"]
-    ret_df = (df.
-    groupby(["code","countryname"]).
-    agg({"vae": "sum",
-        "pve": "sum",
-        "gee": "sum",
-        "rqe": "sum",
-        "rle": "sum",
-        "cce": "sum"}))
+    ret_df = (
+        df.groupby(["code", "countryname"])
+        .agg(
+            {
+                "vae": "sum",
+                "pve": "sum",
+                "gee": "sum",
+                "rqe": "sum",
+                "rle": "sum",
+                "cce": "sum",
+            }
+        )
+        .reset_index()
+    )
+    ret_df["country"] = ret_df.countryname.str.lower()
+    # print(ret_df)
     return ret_df
+
+
+def aggregate_excess_deaths(df: pd.DataFrame) -> pd.DataFrame:
+    ret_df = (
+        df
+        .sort_values("week")
+        .groupby("country")
+        .agg(
+            {
+                    "population": "last",
+                    "week": "last",
+                    "year": "last",
+                    "total_deaths": "sum",
+                    "covid_deaths":  "sum",
+                    "expected_deaths":  "sum",
+                    "excess_deaths":  "sum",
+                    "non_covid_deaths":  "sum",
+                    "covid_deaths_per_100k":  "sum",
+                    "excess_deaths_per_100k":  "sum",
+                    # "excess_deaths_pct_change": "sum""
+            }
+        )
+        .reset_index()
+    )
+    return ret_df
+
+
+
+def combine_data_sets(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
+    yield
+
+
+def pca_wig_data(df: pd.DataFrame):
+    """
+    This fits and transforms our data using PCA. 
+    eda in jupyter suggests that we only need 1 compenent
+    """
+    pca = PCA()
+    vals = pca.fit_transform(df.iloc[:,2:-1])
+    # print(pca.components_)
+    return pd.DataFrame({
+        "country": df["country"],
+        "govt_trust_index": vals*(-1)
+    })

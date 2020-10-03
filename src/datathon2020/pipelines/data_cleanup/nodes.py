@@ -25,8 +25,8 @@
 #
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""These nodes aim to remove imperfections and inconsistancies that exist when the
-data is initally collected.
+"""These nodes aim to remove imperfections and inconsistancies that exist when
+the data is initally collected.
 """
 
 # from typing import Any, Dict
@@ -85,15 +85,25 @@ def clean_data(data: pd.DataFrame) -> pd.DataFrame:
 
 def clean_wig_data(file_path: str) -> pd.DataFrame:
     """Cleans wig data from Stat file - This function is a crutch which relies on R!
-    this takes the file path in from parameters! please set to the appropriate 
+    this takes the file path in from parameters! please set to the appropriate
     one for you!
     Instead of using the complecated xlsx file this uses a varity of R packages
     to load and clean the stata version.
     Make sure that your PATH includes Rscript!
-    For required R packages see requirments.R 
+    For required R packages see requirments.R
     """
     print(os.getcwd())
     os.system(
         f"Rscript src/datathon2020/pipelines/data_cleanup/clean_wigi.R {file_path}"
     )
     return pd.read_csv("data/01_raw/wgidataset_stata/wgidataset.csv")
+
+
+def clean_excess_deaths(df):
+    """
+    cleans_excess deaths data
+    """
+    df = df.loc[df["region"] == df["country"]]
+    df["country"] = df["country"].str.lower()
+    df.loc[df["country"] == "britain", "country"] = "united kingdom"
+    return df
