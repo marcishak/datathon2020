@@ -22,3 +22,8 @@ health_workers_param: "health_workers_pct"
 physicians_param: "physicians_pct"
 handwashing_param: "handwashing_pct"
 glbl_population_param: "population_total"
+WB_health_linear_model_formula: "Deaths ~ hospital_beds_per_1000 + health_workers_pct + population_total +specialist_doctors_pct + physicians_pct + handwashing_pct + Health_exp_pct_GDP_2016"
+health_linear_model_regressor_no: 1
+
+WB_health_linear_model_formula_no_pop: "Deaths ~ hospital_beds_per_1000 + health_workers_pct +specialist_doctors_pct + physicians_pct + handwashing_pct + Health_exp_pct_GDP_2016"
+health_linear_model_regressor_no_no_pop: 1

@@ -167,6 +167,27 @@ wigi_linear_model:
   layer: models
 
 
+wigi_linear_model:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/wigi_linear_model.pkl
+  layer: models
+  versioned: True
+
+
+  
+health_linear_model:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/health_linear_model.pkl
+  layer: models
+  versioned: True
+
+health_linear_model_no_pop:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/health_linear_model_no_pop.pkl
+  layer: models
+  versioned: True
+
+
 wigi_linear_model_summary_output:
   type: text.TextDataSet
   filepath: data/08_reporting/wigi_linear_model_summary_output.txt
@@ -184,6 +205,45 @@ wigi_linear_model_reg_fit:
   filepath: data/08_reporting/wigi_linear_model_reg_fit.png
   versioned: True
   layer: reporting
+
+
+health_linear_model_summary_output:
+  type: text.TextDataSet
+  filepath: data/08_reporting/health_linear_model_summary_output.txt
+  versioned: True
+  layer: reporting
+
+health_linear_model_qqplot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/health_linear_model_qqplot.png
+  versioned: True
+  layer: reporting
+
+health_linear_model_reg_fit:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/health_linear_model_reg_fit.png
+  versioned: True
+  layer: reporting
+
+
+health_linear_model_no_pop_summary_output:
+  type: text.TextDataSet
+  filepath: data/08_reporting/health_linear_model_no_pop_summary_output.txt
+  versioned: True
+  layer: reporting
+
+health_linear_model_no_pop_qqplot:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/health_linear_model_no_pop_qqplot.png
+  versioned: True
+  layer: reporting
+
+health_linear_model_no_pop_reg_fit:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/health_linear_model_no_pop_reg_fit.png
+  versioned: True
+  layer: reporting
+
 
 preds:
   type: pandas.CSVDataSet

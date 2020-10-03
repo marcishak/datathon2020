@@ -82,6 +82,9 @@ def train_lr(X, y):
 
 
 def stats_model_summary(model, regressor_no):
+    """
+    prints summary output for linear model
+    """
     summary_string = model.summary()
     qq_plot = sm.qqplot(model.resid, line="45")
     # plt.show()

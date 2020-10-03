@@ -38,7 +38,7 @@ from .nodes import (
     get_latest_info_WB,
     merge_WB_datasets,
     merge_WB_health_systems,
-    merge_WB_heath_corona
+    merge_WB_heath_corona,
 )
 
 

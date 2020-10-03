@@ -51,5 +51,32 @@ def create_pipeline(**kwargs):
                     "wigi_linear_model_reg_fit",
                 ],
             ),
+            node(
+                train_LinReg,
+                ["WB_health_cases", "params:WB_health_linear_model_formula"],
+                "health_linear_model",
+            ),
+            node(
+                train_LinReg,
+                ["WB_health_cases", "params:WB_health_linear_model_formula_no_pop"],
+                "health_linear_model_no_pop",
+            ),
+            node(
+                stats_model_summary,
+                ["health_linear_model", "params:health_linear_model_regressor_no"],
+                [
+                    "health_linear_model_summary_output",
+                    "health_linear_model_qqplot",
+                    "health_linear_model_reg_fit",
+                ],
+            ),
+            node(stats_model_summary,
+                ["health_linear_model_no_pop", "params:health_linear_model_regressor_no_no_pop"],
+                [
+                    "health_linear_model_no_pop_summary_output",
+                    "health_linear_model_no_pop_qqplot",
+                    "health_linear_model_no_pop_reg_fit",
+                ],
+            )
         ]
     )

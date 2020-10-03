@@ -90,6 +90,9 @@ def build_death_cases_count(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def get_latest_info_WB(df: pd.DataFrame, col: str) -> pd.DataFrame:
+    """
+    Gets the latetest avaible info from a WB data set for each country 
+    """
     df2 = pd.melt(
         df, ["Country Name", "Country Code", "Indicator Name", "Indicator Code"]
     )
@@ -114,19 +117,32 @@ def merge_WB_datasets(
     df6: pd.DataFrame,
 ) -> pd.DataFrame:
     """
-    Merges the 6 WB data sets into  a single megatable
+    Merges the 6 WB data sets into  a single megatable!
     """
-    health_factors = pd.merge(df1, df2, on=["Country Name", "Country Code"], how="outer")
-    health_factors = pd.merge(health_factors, df3, on=["Country Name", "Country Code"], how="outer")
-    health_factors = pd.merge(health_factors, df4, on=["Country Name", "Country Code"], how="outer")
-    health_factors = pd.merge(health_factors, df5, on=["Country Name", "Country Code"], how="outer")
-    health_factors = pd.merge(health_factors, df6, on=["Country Name", "Country Code"], how="outer")
+    health_factors = pd.merge(
+        df1, df2, on=["Country Name", "Country Code"], how="outer"
+    )
+    health_factors = pd.merge(
+        health_factors, df3, on=["Country Name", "Country Code"], how="outer"
+    )
+    health_factors = pd.merge(
+        health_factors, df4, on=["Country Name", "Country Code"], how="outer"
+    )
+    health_factors = pd.merge(
+        health_factors, df5, on=["Country Name", "Country Code"], how="outer"
+    )
+    health_factors = pd.merge(
+        health_factors, df6, on=["Country Name", "Country Code"], how="outer"
+    )
     return health_factors
 
 
 def merge_WB_health_systems(
     WB: pd.DataFrame, health_systems: pd.DataFrame
 ) -> pd.DataFrame:
+    """
+        merges the mega tablew withe the health system table
+    """
     print(WB.head())
     print(health_systems.head())
     return pd.merge(
@@ -135,6 +151,9 @@ def merge_WB_health_systems(
 
 
 def merge_WB_heath_corona(WB: pd.DataFrame, corona: pd.DataFrame) -> pd.DataFrame:
+    """
+    merges the mega/health system table wtih the cornoa total case/death data
+    """
     # print(WB.head())
     # print(corona.head())
     df = pd.merge(WB, corona, left_on="Country Name", right_on="Country/Region")
