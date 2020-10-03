@@ -21,7 +21,8 @@ logs/**
 
 # also keep the example dataset
 !data/01_raw/iris.csv
-
+!data/01_raw/wgidataset_stata/wgidataset.dta
+!data/02_intermediate/**
 
 ##########################
 # Common files
